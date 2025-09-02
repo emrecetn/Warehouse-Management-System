@@ -1,0 +1,19 @@
+// Webhook URL: örnek HTTPS URL'si
+url = "https://your-ngrok-url.ngrok-free.app/creator-webhook";
+
+// JSON payload string olarak oluştur (anonim değerler)
+payload = "{" +
+    "\"Maintenance_Repair_Records\": \"" + ifnull(input.Maintenance_Repair_Records, "Record123") + "\"," +
+    "\"Required_Parts\": \"" + ifnull(input.Required_Parts, "PartXYZ") + "\"," +
+    "\"Status_Information\": \"" + ifnull(input.Status_Information, "Pending") + "\"" +
+    "}";
+
+// Header ayarları
+headers = Map();
+headers.put("Content-Type", "application/json");
+
+// POST isteği gönder
+response = postUrl(url, payload, headers);
+
+// Log
+info "Webhook gönderildi. Response: " + response;
